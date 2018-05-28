@@ -163,7 +163,6 @@ class ViewController: UIViewController {
     /// - Parameter controller: UISegmentedControl
     @IBAction func hideDistanceLabels(_ controller: UISegmentedControl){
    
-        
         if controller.selectedSegmentIndex != 1 {
             
             showDistanceLabels = true
