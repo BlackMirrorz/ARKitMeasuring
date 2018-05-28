@@ -122,6 +122,7 @@ class ViewController: UIViewController {
         //4. Reset The Labels
         clearMeasurementLabels()
         settingsMenu.alpha = 0
+        settingsMenuShown = false
     }
     
     //--------------
