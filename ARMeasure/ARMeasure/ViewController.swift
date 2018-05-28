@@ -132,13 +132,14 @@ class ViewController: UIViewController {
     @IBAction func showSettingsMenu(){
         
         var opacity: CGFloat = 0
+        var angleOpacity: CGFloat = 0
+        var markerOpacity: CGFloat = 0
         
         if settingsMenu.alpha == 0 {
             
             settingsMenu.alpha = 1
             settingsMenuShown = true
             augmentedRealityView.rippleView()
-            setNodesVisibility(augmentedRealityView.scene.rootNode.childNodes, opacity: opacity)
             
         } else {
             
@@ -146,34 +147,25 @@ class ViewController: UIViewController {
             settingsMenuShown = false
             opacity = 1
             
-            //Hide The Lines & Markers
-            let markerAndLineNodes = lineNodes + nodesAdded
-            setNodesVisibility(markerAndLineNodes, opacity: opacity)
-            
-            var angleOpacity: CGFloat = 0
-            var markerOpacity: CGFloat = 0
-            
-            //Show Or Hide The Distance & Angle Nodes
             if showAngleLabels { angleOpacity = 1 }
             if showDistanceLabels { markerOpacity = 1 }
             
-            setNodesVisibility(angleNodes, opacity: angleOpacity)
-            setNodesVisibility(distanceNodes, opacity: markerOpacity)
-            
         }
-
+        
+        setNodesVisibility(angleNodes, opacity: angleOpacity)
+        setNodesVisibility(distanceNodes, opacity: markerOpacity)
+        let markerAndLineNodes = lineNodes + nodesAdded
+        setNodesVisibility(markerAndLineNodes, opacity: opacity)
     }
     
     /// Hides The 3D Distance Labels
     ///
     /// - Parameter controller: UISegmentedControl
     @IBAction func hideDistanceLabels(_ controller: UISegmentedControl){
-    
-        var opacity: CGFloat = 0
+   
         
         if controller.selectedSegmentIndex != 1 {
             
-            opacity = 1
             showDistanceLabels = true
             
         }else{
@@ -181,7 +173,6 @@ class ViewController: UIViewController {
             showDistanceLabels = false
         }
         
-        setNodesVisibility(distanceNodes, opacity: opacity)
     }
     
     /// Hides The 3D Angle Labels
@@ -189,19 +180,15 @@ class ViewController: UIViewController {
     /// - Parameter controller: UISegmentedControl
     @IBAction func hideAngleLabels(_ controller: UISegmentedControl){
         
-        var opacity: CGFloat = 0
 
         if controller.selectedSegmentIndex != 1 {
             
-            opacity = 1
             showAngleLabels = true
             
         }else{
             showAngleLabels = false
         }
-        
-        setNodesVisibility(angleNodes, opacity: opacity)
-        
+            
     }
     
     /// Determines Whether The VideoNode Should Be Placed Using Plane Detection
