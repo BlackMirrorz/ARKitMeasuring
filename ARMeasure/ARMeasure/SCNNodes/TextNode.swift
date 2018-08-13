@@ -51,7 +51,7 @@ class TextNode: SCNNode{
         textGeometry.flatness = 0
         
         //6. Set The Alignment Mode Of The Text
-        textGeometry.alignmentMode = kCAAlignmentCenter
+        textGeometry.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.center)
         
         //7. Set Our Text Colour & Apply The Font
         textGeometry.firstMaterial?.diffuse.contents = colour
@@ -131,4 +131,9 @@ class TextNode: SCNNode{
     
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromCATextLayerAlignmentMode(_ input: CATextLayerAlignmentMode) -> String {
+	return input.rawValue
 }
